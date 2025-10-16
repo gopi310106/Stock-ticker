@@ -1,0 +1,255 @@
+/* --- General & Body --- */
+:root {
+    --background-dark: #0a0a0f;
+    --primary-accent: #61dafb;
+    --text-primary: #e6edf3;
+    --text-secondary: #a0aec0;
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --background-glass: rgba(255, 255, 255, 0.05);
+    --color-increase: #48bb78;
+    --color-decrease: #f56565;
+}
+
+body {
+    background-color: var(--background-dark);
+    color: var(--text-primary);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 2rem;
+    overflow-x: hidden; /* Prevents horizontal scroll from glow effect */
+
+    /* --- UPDATED: Background Image Styles --- */
+    background-image: url('stock-chart-bg.jpeg'); /* Using your new image */
+    background-size: cover; /* Make sure the image covers the whole background */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
+    background-attachment: fixed; /* Keep background fixed when scrolling */
+    position: relative; /* Needed for pseudo-element overlay */
+}
+
+/* --- UPDATED: Overlay for Blur and Dimming --- */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Keep this behind the container */
+    
+    /* Apply blur directly to the pseudo-element's background */
+    backdrop-filter: blur(8px); /* Adjust blur strength as desired */
+    -webkit-backdrop-filter: blur(8px); /* For Safari */
+    
+    /* Dimming overlay - adjust opacity for darker/lighter. */
+    /* This makes the background image slightly transparent and darker for contrast. */
+    background-color: rgba(0, 0, 0, 0.5); /* 0.5 for a good balance of visibility and dimming */
+}
+
+@keyframes background-pan {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2; /* Ensures content is on top of the blurred background */
+}
+
+/* --- Headers --- */
+.main-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.main-header h1 {
+    font-size: 2.8rem;
+    color: var(--primary-accent);
+    margin: 0;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(97, 218, 251, 0.4); /* Subtle glow for text */
+}
+
+.subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 3rem;
+}
+
+/* SVG Logo Color */
+.logo {
+    fill: none; /* Keep fill none as strokes are used */
+    stroke: var(--primary-accent); /* Use accent color for lines */
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+
+/* --- Stock List Grid (Homepage) & Glassmorphism Cards --- */
+.stock-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.stock-card {
+    background: var(--background-glass);
+    backdrop-filter: blur(15px); /* Slightly more blur for cards */
+    -webkit-backdrop-filter: blur(15px); /* For Safari */
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    padding: 1.5rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stock-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(97, 218, 251, 0.7); /* Brighter hover border */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Stronger hover shadow */
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 1rem;
+}
+
+.card-header h3 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: var(--text-primary);
+}
+
+.card-header span {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+.card-price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.card-change {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* --- Dynamic Colors for Price --- */
+.increase {
+    color: var(--color-increase);
+}
+
+.decrease {
+    color: var(--color-decrease);
+}
+
+/* --- Skeleton Loader --- */
+.skeleton-loader {
+    background: var(--background-glass);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    height: 170px;
+    animation: pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes pulse {
+    0% { background-color: var(--background-glass); }
+    50% { background-color: rgba(255, 255, 255, 0.1); }
+    100% { background-color: var(--background-glass); }
+}
+
+/* --- Reusing styles for details page --- */
+.details-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-glass);
+    padding-bottom: 1.5rem;
+}
+
+.details-header h1 {
+    margin: 0;
+    font-size: 2.8rem;
+    color: var(--text-primary);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.details-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.price-section {
+    text-align: right;
+}
+
+.price-large {
+    font-size: 3rem;
+    font-weight: 700;
+}
+
+.price-change-medium {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+#chart-container, .details-grid {
+    background: var(--background-glass);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--border-glass);
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 2rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.detail-value {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.back-button {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--primary-accent);
+    text-decoration: none;
+    font-size: 1rem;
+}

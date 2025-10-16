@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="details-header">
+            <div>
+                <h1 id="stock-name-title">Loading...</h1>
+                <h2 id="stock-symbol-title"></h2>
+            </div>
+            <div class="price-section">
+                <div id="current-price" class="price-large">--</div>
+                <div id="price-change" class="price-change-medium">--</div>
+            </div>
+        </header>
+
+        <div id="chart-container"></div>
+        
+        <div class="details-grid">
+            <div class="detail-item">
+                <span class="detail-label">Open</span>
+                <span id="open-price" class="detail-value">--</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">High</span>
+                <span id="high-price" class="detail-value">--</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Low</span>
+                <span id="low-price" class="detail-value">--</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Prev. Close</span>
+                <span id="prev-close" class="detail-value">--</span>
+            </div>
+            <div class="detail-item">
+                <span class="detail-label">Volume</span>
+                <span id="volume" class="detail-value">--</span>
+            </div>
+             <div class="detail-item">
+                <span class="detail-label">Market Cap</span>
+                <span id="market-cap" class="detail-value">--</span>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-button">&larr; Back to Dashboard</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="script.js"></script>
+</body>
+</html>
